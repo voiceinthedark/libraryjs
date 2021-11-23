@@ -1,0 +1,53 @@
+:root{
+    --document-bg: blanchedalmond;
+    --document-header-color: #000;
+    --table-header-bg: rgb(99, 100, 100);
+    --table-header-fg: rgb(255, 255, 255);
+}
+
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+    background-color: var(--document-bg);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.container > h1 {
+    color: var(--document-header-color);
+    line-height: 1.5rem;
+    font-size: 48px;
+}
+
+.container > table{
+    max-width: 760px;
+}
+
+.container table th{
+    background-color: var(--table-header-bg);
+    color: var(--table-header-fg);
+}
+
+.container > table > tr, td, th{
+    border-bottom: 1px solid #000;
+}
+
+#booktable:last-child {
+    border-bottom: none;
+}
+
+#booktable tr:hover{
+    background-color: rgb(235, 248, 255);
+}
