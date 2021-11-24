@@ -1,6 +1,8 @@
 const bookTable = document.querySelector('#booktable');
+const bookTableBody = document.querySelector('#booktable > tbody');
 const openAddBook = document.querySelector('#openaddbook');
 const closeSideForm = document.querySelector('.closebtn');
+const addBookForm = document.querySelector('#addbook');
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -39,8 +41,8 @@ let library = [
 // const newBook = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 // console.log(newBook.info());
 
-function addBookToLibrary() {
-    
+function addBookToLibrary(title, author, pages, read) {
+  library.push(new Book(title, author, pages, read));    
 }
 
 function showLibrary(books) {
@@ -52,9 +54,14 @@ function showLibrary(books) {
             td.textContent = field;
             trow.appendChild(td);
         }
-        bookTable.appendChild(trow);        
+        bookTableBody.appendChild(trow);        
     }); 
+}
 
+function clearTable() {
+  console.log(bookTable.childNodes); 
+  const emptyBody = document.createElement('tbody');
+  bookTable.replaceChild(emptyBody, bookTableBody);
 }
 
 /**
@@ -68,7 +75,22 @@ closeSideForm.addEventListener('click', (e) => {
     document.querySelector('#bookpanel').style.width = '0px';
 })
 
+addBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const pages = document.querySelector('#pages').value;
+  const read = document.querySelector('#read').checked;
+
+  // console.log(title, author, pages, read);
+
+  addBookToLibrary(title, author, pages, read);
+  // console.log(library);
+  clearTable();
+  showLibrary(library);
+})
 
 
 showLibrary(library);
+
 

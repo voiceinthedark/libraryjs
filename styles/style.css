@@ -64,6 +64,8 @@ body{
     border-bottom: 1px solid #000;
 }
 
+
+
 #booktable:last-child {
     border-bottom: none;
 }
