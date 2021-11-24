@@ -1,27 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Libraryjs</title>
     <script src="./scripts/script.js" defer></script>
     <link rel="stylesheet" type="text/css" href="./styles/style.css" />
-</head>
-<body>
-    <main class="container">
-        <h1>Libraryjs</h1>
-        <table id='booktable'>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Pages</th>
-                <th>Read?</th>
-            </tr>
+  </head>
+  <body>
+    <div id="bookpanel" class="bookpanel">
+      <a href="javascript:void(0)" class="closebtn">&times;</a>
+      <form id="addbook">
+        <h3>Add a book</h3>
+        <div>
+          <label for="title">Title</label>
+          <input type="text" id="title" />
+        </div>
+        <div>
+          <label for="author">Author</label>
+          <input type="text" id="author" />
+        </div>
+        <div>
+          <label for="pages">Pages</label>
+          <input type="number" id="pages" min="0" />
+        </div>
+        <div>
+          <label for="read"><abbr title="Did you finish reading the book?">Read?</abbr></label>
+          <input type="checkbox" id="read" />
+        </div>
+        <div>
+          <input type="submit" value="Add Book"/>
+        </div>
+      </form>
+    </div>
 
-        </table>
-        
+    <main class="container">
+      <h1>Libraryjs</h1>
+      <button id="openaddbook">Add Book</button>
+      <table id="booktable">
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Read?</th>
+        </tr>
+      </table>
     </main>
-    
-</body>
+  </body>
 </html>

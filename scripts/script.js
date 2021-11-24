@@ -1,4 +1,6 @@
 const bookTable = document.querySelector('#booktable');
+const openAddBook = document.querySelector('#openaddbook');
+const closeSideForm = document.querySelector('.closebtn');
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -54,6 +56,19 @@ function showLibrary(books) {
     }); 
 
 }
+
+/**
+ * Methods to open and close the side panel
+ */
+openAddBook.addEventListener('click', (e) => {
+    document.querySelector('#bookpanel').style.width = '320px';
+});
+
+closeSideForm.addEventListener('click', (e) => {
+    document.querySelector('#bookpanel').style.width = '0px';
+})
+
+
 
 showLibrary(library);
 
