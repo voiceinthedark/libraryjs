@@ -69,7 +69,10 @@ function loadDataFromLocalStorage() {
  * @param {Boolean} read
  */
 function addBookToLibrary(title, author, pages, read) {
-  library.push(new Book(title, author, pages, read));
+  const newBook = new Book(title, author, pages, read);
+  library.push(newBook);
+  let record = JSON.stringify(newBook._fields());
+  localStorage.setItem(newBook.id, record);
 }
 
 /**
