@@ -156,7 +156,15 @@ function clearTable() {
  * Methods to open and close the side panel
  */
 openAddBook.addEventListener('click', (e) => {
-  document.querySelector('#bookpanel').style.width = '320px';
+  // debugger;
+  // e.preventDefault();
+  let sidePanel = document.querySelector('#bookpanel');
+  if(sidePanel.style.width === '0px' || sidePanel.style.width === ""){
+    sidePanel.style.width = '320px';
+  }
+    else{
+      sidePanel.style.width = '0px';
+    }
 });
 
 closeSideForm.addEventListener('click', (e) => {
