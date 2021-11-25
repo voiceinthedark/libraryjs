@@ -4,6 +4,8 @@ const openAddBook = document.querySelector('#openaddbook');
 const closeSideForm = document.querySelector('.closebtn');
 const addBookForm = document.querySelector('#addbook');
 
+
+
 function Book(id = uuid(), title, author, pages, read) {
   this.id = id;
   this.title = title;
@@ -120,6 +122,30 @@ function showLibrary(books) {
         trow.appendChild(td);
       }
     }
+    // Adding the delete button
+    const deleteButton = document.createElement('span');    
+    deleteButton.textContent = '✖';
+    deleteButton.className = 'deletebtn';
+    deleteButton.setAttribute('data-id', id);  
+
+    deleteButton.addEventListener('click', (e) => {
+      // console.log(e.target.dataset.id);
+      
+      library = library.filter(b => b.id !== e.target.dataset.id);
+      clearTable();
+      showLibrary(library);
+    });
+
+    trow.appendChild(deleteButton);
+
+    trow.addEventListener('mouseover', (e) => {
+      deleteButton.style.display = 'inline';
+    });
+
+    trow.addEventListener('mouseout', (e) => {
+      deleteButton.style.display = 'none';
+    });
+
     bookTableBody.appendChild(trow);
   });
 
@@ -136,8 +162,9 @@ function showLibrary(books) {
       localStorage.setItem(bookToRead[0].id, newValue);
       e.target.textContent = bookToRead[0].read ? 'Unread' : 'Read';
     });
-  });
+  });  
 }
+
 
 
 /**

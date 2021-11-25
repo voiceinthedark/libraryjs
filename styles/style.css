@@ -50,9 +50,11 @@ body{
 }
 
 .container > table{
-    max-width: 80%;
+    flex: 1 1 100%;
+    width: 85%;
     border-collapse: collapse;
     cursor: crosshair;
+    /* table-layout: fixed; */
 }
 
 .container table th{
@@ -60,8 +62,22 @@ body{
     color: var(--table-header-fg);
 }
 
+/* .container table tr:hover {
+    transform: scale(0.99)
+} */
+
+/* .container table tbody tr:hover::after{
+    content: "✖";
+    cursor: pointer;    
+    padding-left: 5px;    
+    position: absolute;
+    right: 15%;    
+    color: var(--panel-bg);
+} */
+
 .container > table > tr, td, th{
     border-bottom: 1px solid #000;
+    vertical-align: middle;
 }
 
 .container table tr td button{
@@ -156,4 +172,11 @@ input[type=submit]:hover{
     text-align: justify;
 }
 
-
+.deletebtn {
+    display: none;
+    color: var(--panel-bg);
+    cursor: pointer;
+    padding-right: 5px;
+    position: absolute;
+    left: 6%;    
+}
