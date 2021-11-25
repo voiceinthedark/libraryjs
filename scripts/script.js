@@ -7,8 +7,6 @@ const deleteModal = document.querySelector('#deletemodal');
 const cancelModalButton = document.querySelector('#modalcancel');
 const deleteRecordModalButton = document.querySelector('#modaldelete');
 
-
-
 function Book(id = uuid(), title, author, pages, read) {
   this.id = id;
   this.title = title;
@@ -66,7 +64,6 @@ function populateLocalStorage(library) {
 function loadDataFromLocalStorage() {
   if (localStorage.length > 0) {
     for (let i = 0; i < localStorage.length; i++) {
-      // console.log(localStorage[localStorage.key(i)]);
       let record = JSON.parse(localStorage[localStorage.key(i)]);
       library.push(
         new Book(
@@ -126,14 +123,14 @@ function showLibrary(books) {
       }
     }
     // Adding the delete button
-    const deleteButton = document.createElement('span');    
+    const deleteButton = document.createElement('span');
     deleteButton.textContent = '✖';
     deleteButton.className = 'deletebtn';
-    deleteButton.setAttribute('data-id', id);  
+    deleteButton.setAttribute('data-id', id);
 
     deleteButton.addEventListener('click', (e) => {
       // console.log(e.target.dataset.id);
-      openModal(e.target.dataset.id);           
+      openModal(e.target.dataset.id);
     });
 
     trow.appendChild(deleteButton);
@@ -162,10 +159,8 @@ function showLibrary(books) {
       localStorage.setItem(bookToRead[0].id, newValue);
       e.target.textContent = bookToRead[0].read ? 'Unread' : 'Read';
     });
-  });  
+  });
 }
-
-
 
 /**
  * Clear and empty the table body
@@ -186,12 +181,11 @@ openAddBook.addEventListener('click', (e) => {
   // debugger;
   // e.preventDefault();
   let sidePanel = document.querySelector('#bookpanel');
-  if(sidePanel.style.width === '0px' || sidePanel.style.width === ""){
+  if (sidePanel.style.width === '0px' || sidePanel.style.width === '') {
     sidePanel.style.width = '320px';
+  } else {
+    sidePanel.style.width = '0px';
   }
-    else{
-      sidePanel.style.width = '0px';
-    }
 });
 
 closeSideForm.addEventListener('click', (e) => {
@@ -238,26 +232,19 @@ function openModal(targetId) {
   deleteRecordModalButton.addEventListener('click', (e) => {
     library = library.filter((b) => b.id !== targetId);
     deleteModal.style.display = 'none';
+    localStorage.removeItem(targetId);
     clearTable();
     showLibrary(library);
-
   });
-
-
-
-  
 }
-
-
 
 cancelModalButton.addEventListener('click', (e) => {
   deleteModal.style.display = 'none';
 });
 
-
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == deleteModal) {
-    deleteModal.style.display = "none";
+    deleteModal.style.display = 'none';
   }
-}
+};
