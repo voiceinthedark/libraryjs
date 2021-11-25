@@ -64,7 +64,19 @@ body{
     border-bottom: 1px solid #000;
 }
 
+.container table tr td button{
+    border-radius: 5px;
+    border: 0px solid black;
+    background-color: var(--table-header-bg);
+    color: var(--table-header-fg);
+    font-size: 20px;
+    width: 120px;    
+}
 
+.container table tr td button:hover {
+    background-color: rgb(19, 53, 19);
+    cursor: pointer;
+}
 
 #booktable:last-child {
     border-bottom: none;

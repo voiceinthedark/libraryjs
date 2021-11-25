@@ -4,8 +4,8 @@ const openAddBook = document.querySelector('#openaddbook');
 const closeSideForm = document.querySelector('.closebtn');
 const addBookForm = document.querySelector('#addbook');
 
-function Book(title, author, pages, read) {
-  this.id = uuid();
+function Book(id = uuid(), title, author, pages, read) {
+  this.id = id;
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -26,6 +26,10 @@ Book.prototype._fields = function () {
     pages: this.pages,
     read: this.read,
   };
+};
+
+Book.prototype.unread = function () {
+  this.read = !this.read;
 };
 
 let library = [
@@ -51,12 +55,23 @@ function populateLocalStorage(library) {
   }
 }
 
+/**
+ * Load data from localStorage if they exist for our page
+ */
 function loadDataFromLocalStorage() {
   if (localStorage.length > 0) {
     for (let i = 0; i < localStorage.length; i++) {
-      console.log(localStorage[localStorage.key(i)]);
+      // console.log(localStorage[localStorage.key(i)]);
       let record = JSON.parse(localStorage[localStorage.key(i)]);
-      library.push(new Book(record.title, record.author, record.pages, record.read));
+      library.push(
+        new Book(
+          record.id,
+          record.title,
+          record.author,
+          record.pages,
+          record.read
+        )
+      );
     }
   }
 }
@@ -69,9 +84,13 @@ function loadDataFromLocalStorage() {
  * @param {Boolean} read
  */
 function addBookToLibrary(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
+  // Initiate a new book instance
+  const newBook = new Book(uuid(), title, author, pages, read);
+  // add the new book to the library array
   library.push(newBook);
+  // extract a JSON record of the new book
   let record = JSON.stringify(newBook._fields());
+  // Add the book to the local storage
   localStorage.setItem(newBook.id, record);
 }
 
@@ -83,8 +102,18 @@ function showLibrary(books) {
   books.forEach((book) => {
     // console.log(book.info());
     const trow = document.createElement('tr');
+    let id;
     for (let field of Object.keys(book._fields())) {
       if (field === 'id') {
+        trow.setAttribute('data-id', book[field]);
+        id = book[field];
+      } else if (field === 'read') {
+        const td = document.createElement('td');
+        td.innerHTML =
+          book[field] === false
+            ? `<button data-id=${id} class="readbtn">Read</button>`
+            : `<button data-id=${id} class="readbtn">Unread</button>`;
+        trow.appendChild(td);
       } else {
         const td = document.createElement('td');
         td.textContent = book[field];
@@ -93,15 +122,31 @@ function showLibrary(books) {
     }
     bookTableBody.appendChild(trow);
   });
+
+  const readBtn = document.querySelectorAll('.readbtn');
+  readBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const bookToRead = books.filter(
+        (b) => b._fields().id === e.target.dataset.id
+      );
+      bookToRead[0].unread();
+      // console.log(bookToRead[0].read);
+      const newValue = JSON.stringify(bookToRead[0]);
+      // get data from localStorage
+      localStorage.setItem(bookToRead[0].id, newValue);
+      e.target.textContent = bookToRead[0].read ? 'Unread' : 'Read';
+    });
+  });
 }
+
 
 /**
  * Clear and empty the table body
  */
 function clearTable() {
-  console.log(bookTable.childNodes);
+  // console.log(bookTable.childNodes);
   const rows = document.querySelectorAll('#booktable > tbody > tr');
-  console.log(rows);
+  // console.log(rows);
   for (let i = 0; i < rows.length; i++) {
     bookTableBody.removeChild(rows[i]);
   }
@@ -118,14 +163,16 @@ closeSideForm.addEventListener('click', (e) => {
   document.querySelector('#bookpanel').style.width = '0px';
 });
 
+/**
+ * Methods to addbook from the side form
+ */
 addBookForm.addEventListener('submit', (e) => {
+  //disallow redirection
   e.preventDefault();
   const title = document.querySelector('#title').value;
   const author = document.querySelector('#author').value;
   const pages = document.querySelector('#pages').value;
   const read = document.querySelector('#read').checked;
-
-  // console.log(title, author, pages, read);
 
   addBookToLibrary(title, author, pages, read);
   // make sure the table is cleared.
