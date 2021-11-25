@@ -3,6 +3,9 @@ const bookTableBody = document.querySelector('#booktable > tbody');
 const openAddBook = document.querySelector('#openaddbook');
 const closeSideForm = document.querySelector('.closebtn');
 const addBookForm = document.querySelector('#addbook');
+const deleteModal = document.querySelector('#deletemodal');
+const cancelModalButton = document.querySelector('#modalcancel');
+const deleteRecordModalButton = document.querySelector('#modaldelete');
 
 
 
@@ -130,10 +133,7 @@ function showLibrary(books) {
 
     deleteButton.addEventListener('click', (e) => {
       // console.log(e.target.dataset.id);
-      
-      library = library.filter(b => b.id !== e.target.dataset.id);
-      clearTable();
-      showLibrary(library);
+      openModal(e.target.dataset.id);           
     });
 
     trow.appendChild(deleteButton);
@@ -230,4 +230,34 @@ function uuid() {
     let v = c === 'x' ? rnd : (rnd & 0x3) | 0x8;
     return v.toString(16);
   });
+}
+
+function openModal(targetId) {
+  deleteModal.style.display = 'flex';
+
+  deleteRecordModalButton.addEventListener('click', (e) => {
+    library = library.filter((b) => b.id !== targetId);
+    deleteModal.style.display = 'none';
+    clearTable();
+    showLibrary(library);
+
+  });
+
+
+
+  
+}
+
+
+
+cancelModalButton.addEventListener('click', (e) => {
+  deleteModal.style.display = 'none';
+});
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == deleteModal) {
+    deleteModal.style.display = "none";
+  }
 }
