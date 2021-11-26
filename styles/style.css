@@ -66,6 +66,7 @@ body{
 .container table th{
     background-color: var(--table-header-bg);
     color: var(--table-header-fg);
+    border-bottom: 2px solid black;
 }
 
 /* .container table tr:hover {
@@ -288,4 +289,5 @@ input[type=submit]:hover{
     from {opacity: 0}
     to {opacity: 1}    
 }
+
 /* end delete modal*/

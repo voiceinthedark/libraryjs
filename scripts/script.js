@@ -228,6 +228,11 @@ function uuid() {
 
 function openModal(targetId) {
   deleteModal.style.display = 'flex';
+  const modalBody = document.querySelector('.modal-body');
+  const bodyContent = document.createElement('p');
+  const bookToDelete = JSON.parse(localStorage.getItem(targetId));
+  bodyContent.textContent = `Are you sure you want to delete ${bookToDelete.title}?`;
+  modalBody.replaceChild(bodyContent, modalBody.childNodes[1]);
 
   deleteRecordModalButton.addEventListener('click', (e) => {
     library = library.filter((b) => b.id !== targetId);
