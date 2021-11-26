@@ -58,7 +58,8 @@ function populateLocalStorage(library) {
   }
 }
 
-window.onload((e) => {
+window.addEventListener('load', (e) => {
+  console.log('loaded');
   if(localStorage.length < 1){
     const books = [
       new Book('The Hobbit', 'J.R.R. Tolkien', 295, false),
