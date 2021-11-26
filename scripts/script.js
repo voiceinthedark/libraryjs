@@ -58,6 +58,24 @@ function populateLocalStorage(library) {
   }
 }
 
+// window.onload((e) => {
+//   if(localStorage.length < 1){
+//     const books = [
+//       new Book('The Hobbit', 'J.R.R. Tolkien', 295, false),
+//       new Book('Starsight', 'Brandon Sanderson', 325, false),
+//       new Book(
+//         'The 7 1/2 deaths of Evelynn Hardcastle',
+//         'Stuart Turton',
+//         429,
+//         true
+//       ),
+//       new Book('Recursion', 'Blake Crouch', 329, true),
+//       new Book('Rhythm of War', 'Brandon Sanderson', 1232, true),
+//     ];
+//     populateLocalStorage(books);
+//   }
+// });
+
 /**
  * Load data from localStorage if they exist for our page
  */
