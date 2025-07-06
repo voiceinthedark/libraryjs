@@ -1,72 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
 
-:root{
-    --document-bg: #ffffff;
-    --document-header-color: #000;
-    --table-header-bg: rgb(41, 116, 87);
-    --table-header-fg: rgb(255, 255, 255);
-    --panel-bg: rgb(19, 146, 106);
+:root {
+  --document-bg: #ffffff;
+  --document-header-color: #000;
+  --table-header-bg: rgb(41, 116, 87);
+  --table-header-fg: rgb(255, 255, 255);
+  --panel-bg: rgb(19, 146, 106);
 }
 
 /* general body properties*/
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-body{
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.6rem;
-    background-color: var(--document-bg);
+body {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  background-color: var(--document-bg);
 }
+
 /* end general properties*/
 
 /* main page container */
-.container{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
 }
 
-.container > h1 {
-    color: var(--document-header-color);
-    line-height: 1.5rem;
-    font-size: 56px;
+.container>h1 {
+  color: var(--document-header-color);
+  line-height: 1.5rem;
+  font-size: 56px;
 }
+
 /* end main page container */
 
 /* add book button */
 #openaddbook {
-    background-color: transparent;
-    border-radius: 5px;
-    border: 1px solid black;
-    margin: 10px 0;
-    padding: 14px 28px;
-    font-size: 26px;
-    cursor: pointer;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 10px 0;
+  padding: 14px 28px;
+  font-size: 26px;
+  cursor: pointer;
 }
 
-#openaddbook:hover{
-    background-color: var(--panel-bg);
-    color: white;
+#openaddbook:hover {
+  background-color: var(--panel-bg);
+  color: white;
 }
+
 /* end add book button */
 
 /* table properties */
-.container > table{
-    flex: 1 1 100%;
-    width: 85%;
-    border-collapse: collapse;
-    cursor: crosshair;
-    /* table-layout: fixed; */
+.container>table {
+  flex: 1 1 100%;
+  width: 85%;
+  border-collapse: collapse;
+  cursor: crosshair;
+  /* table-layout: fixed; */
+
 }
 
-.container table th{
-    background-color: var(--table-header-bg);
-    color: var(--table-header-fg);
-    border-bottom: 2px solid black;
+.container table th {
+  background-color: var(--table-header-bg);
+  color: var(--table-header-fg);
+  border-bottom: 2px solid black;
 }
 
 /* .container table tr:hover {
@@ -82,50 +88,62 @@ body{
     color: var(--panel-bg);
 } */
 
-.container > table > tr, td, th{
-    border-bottom: 1px solid #000;
-    vertical-align: middle;
+
+.container>table>tr,
+td,
+th {
+  border-bottom: 1px solid #000;
+  vertical-align: middle;
 }
 
-.container table tr td button{
-    border-radius: 5px;
-    border: 0px solid black;
-    background-color: var(--table-header-bg);
-    color: var(--table-header-fg);
-    font-size: 20px;
-    width: 120px;    
+.title-back{
+  background-color: #e3e3ef;
+}
+
+.container table tr td button {
+  border-radius: 5px;
+  border: 0px solid black;
+  background-color: var(--table-header-bg);
+  color: var(--table-header-fg);
+  font-size: 20px;
+  width: 120px;
 }
 
 .container table tr td button:hover {
-    background-color: rgb(19, 53, 19);
-    cursor: pointer;
+  background-color: rgb(19, 53, 19);
+  cursor: pointer;
 }
 
 #booktable:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
-#booktable tr:hover{
-    background-color: rgb(235, 248, 255);
+#booktable tr:hover {
+  background-color: rgb(235, 248, 255);
 }
+
 /* end table properties */
 
 /* bookpanel properties*/
 .bookpanel {
-    height: 100%;
-    width: 0px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: var(--panel-bg);
-    overflow-x: hidden;
-    padding-top: 60px;
-    /* padding-left: 3px; */
-    transition: 0.5s;
-    color: white;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  width: 0px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--panel-bg);
+  overflow-x: hidden;
+  padding-top: 60px;
+  padding-right: 12px;
+  /* padding-left: 3px; */
+  transition: 150ms;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 18px;
 }
 
 .bookpanel .closebtn {
@@ -137,160 +155,169 @@ body{
 }
 
 .bookpanel a {
-    text-decoration: none;
-    color:#ffffff;
+  text-decoration: none;
+  color: #ffffff;
 }
 
-.bookpanel input{
-    float: right;    
-    margin-right: 5px;
-    height: 30px;
-    padding: 0 5px;
-    border-radius: 5px;
-    border: 0px;
-    font-size: 18px;
+.bookpanel input {
+  float: right;
+  margin-right: 5px;
+  height: 30px;
+  padding: 0 5px;
+  border-radius: 5px;
+  border: 0px;
+  font-size: 18px;
 }
 
-.bookpanel input:focus{
-    outline: 3px solid rgb(235, 240, 233);
-    background-color: rgb(67, 126, 86);
-    color: white;
+.bookpanel input:focus {
+  outline: 3px solid rgb(235, 240, 233);
+  background-color: rgb(67, 126, 86);
+  color: white;
 }
 
-input[type=checkbox]{
-    cursor: pointer;
+input[type=checkbox] {
+  cursor: pointer;
 }
 
-input[type=submit]{
-    width: 95%;
-    border: 1px solid black;
-    font-size: 16px;
-    /* padding-top: 10px; */
-    border-radius: 5px;
-    margin-right: 10px;
-    text-align: center;
-    height: 50px;
-    font-size: 22px;
+input[type=submit] {
+  width: 95%;
+  border: 1px solid black;
+  font-size: 16px;
+  /* padding-top: 10px; */
+  border-radius: 5px;
+  margin-right: 10px;
+  text-align: center;
+  height: 50px;
+  font-size: 22px;
 }
 
-input[type=submit]:hover{
-    background-color: rgb(21, 143, 5);
-    color: white;
-    
+input[type=submit]:hover {
+  background-color: rgb(21, 143, 5);
+  color: white;
+
 }
 
-#addbook div{
-    height: 35px;
-    text-align: justify;
+#addbook div {
+  height: 35px;
+  text-align: justify;
 }
+
 /* end bookpanel */
 
 /* delete row button */
 .deletebtn {
-    display: none;
-    color: var(--panel-bg);
-    cursor: pointer;
-    padding-right: 5px;
-    position: absolute;
-    left: 6%;    
+  display: none;
+  color: var(--panel-bg);
+  cursor: pointer;
+  padding-right: 5px;
+  position: absolute;
+  left: 6%;
 }
+
 /* end delete row button */
 
 /* delete modal */
 .deletemodal {
-    display: none;
-    z-index: 1; /*always on top*/
-    position: fixed; /*position never changes*/
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    background-color: rgba(0,0,0,0.4);
-    /* opacity: 0.5; */
-    align-items: center;
-    justify-content: center;
-    animation-duration: 0.8s;
-    animation-name: fadein;
+  display: none;
+  z-index: 1;
+  /*always on top*/
+  position: fixed;
+  /*position never changes*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* opacity: 0.5; */
+  align-items: center;
+  justify-content: center;
+  animation-duration: 0.8s;
+  animation-name: fadein;
 }
 
-.deletemodal .modal-content{    
-    display: flex;
-    flex-direction: column;
-    /* opacity: 1;     */
-    align-items: center;
-    justify-content: center;
-    width: 650px;
-    height: 270px;
-    /* border-radius: 10px; */
-    /* border: 3px solid white; */
+.deletemodal .modal-content {
+  display: flex;
+  flex-direction: column;
+  /* opacity: 1;     */
+  align-items: center;
+  justify-content: center;
+  width: 650px;
+  height: 270px;
+  /* border-radius: 10px; */
+  /* border: 3px solid white; */
 }
 
-.modal-content .modal-header{
-    padding: 2px 16px;
-    background-color: var(--panel-bg);
-    color: white;    
-    flex: 0 0.25 25%;
-    /* height: 100px; */
-    text-align: center;
-    width: 100%;
-    /* max-height: 25%; */
-    height: 25%;
-    /* margin: 0; */    
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+.modal-content .modal-header {
+  padding: 2px 16px;
+  background-color: var(--panel-bg);
+  color: white;
+  flex: 0 0.25 25%;
+  /* height: 100px; */
+  text-align: center;
+  width: 100%;
+  /* max-height: 25%; */
+  height: 25%;
+  /* margin: 0; */
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .modal-content .modal-header h4 {
-    margin-top: 5px;
-    line-height: 1.5rem;    
+  margin-top: 5px;
+  line-height: 1.5rem;
 }
 
-.modal-content .modal-body{
-    padding: 2px 16px;
-    background-color: white;
-    flex: 0 0.75 75%;
-    text-align: center;
-    width: 100%;
-    height: 75%;
+.modal-content .modal-body {
+  padding: 2px 16px;
+  background-color: white;
+  flex: 0 0.75 75%;
+  text-align: center;
+  width: 100%;
+  height: 75%;
 }
 
-.modal-content .modal-footer{
-    padding: 2px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--panel-bg);
-    gap: 5px;
-    width: 100%;
-    height: 25%;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+.modal-content .modal-footer {
+  padding: 2px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--panel-bg);
+  gap: 5px;
+  width: 100%;
+  height: 25%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .modal-content .modal-footer button {
-    /* width: 40px; */
-    margin: 10px 5px;
-    padding: 13px 45px;
-    border-radius: 3px;
-    border: 0px solid black;
-    font-size: 1.3rem;
-    font-weight: 600;
+  /* width: 40px; */
+  margin: 10px 5px;
+  padding: 13px 45px;
+  border-radius: 3px;
+  border: 0px solid black;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 #modalcancel:hover {
-    background-color: #c2e976 ;
-    color: rgb(14, 13, 13);
+  background-color: #c2e976;
+  color: rgb(14, 13, 13);
 }
 
 #modaldelete:hover {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 
 @keyframes fadein {
-    from {opacity: 0}
-    to {opacity: 1}    
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
 }
 
 /* end delete modal*/

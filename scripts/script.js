@@ -138,10 +138,16 @@ function showLibrary(books) {
             : `<button data-id=${id} class="readbtn">Unread</button>`;
         trow.appendChild(td);
       } else {
+        
         const td = document.createElement('td');
         td.textContent = book[field];
+        if(trow.childNodes.length === 0){
+          // console.log('childnodes ' + trow.childNodes.length)
+          td.classList.toggle("title-back");
+        }
         trow.appendChild(td);
       }
+        trow.childNodes.forEach(c => c.style.paddingLeft = "10px");
     }
     // Adding the delete button
     const deleteButton = document.createElement('span');
@@ -203,7 +209,7 @@ openAddBook.addEventListener('click', (e) => {
   // e.preventDefault();
   let sidePanel = document.querySelector('#bookpanel');
   if (sidePanel.style.width === '0px' || sidePanel.style.width === '') {
-    sidePanel.style.width = '320px';
+    sidePanel.style.width = '20%';
   } else {
     sidePanel.style.width = '0px';
   }
