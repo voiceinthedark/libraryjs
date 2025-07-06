@@ -151,6 +151,7 @@ function showLibrary(books) {
     }
     // Adding the delete button
     const deleteButton = document.createElement('span');
+    const deleteSlot = document.createElement('td');
     deleteButton.textContent = '✖';
     deleteButton.className = 'deletebtn';
     deleteButton.setAttribute('data-id', id);
@@ -160,15 +161,17 @@ function showLibrary(books) {
       openModal(e.target.dataset.id);
     });
 
-    trow.appendChild(deleteButton);
+    deleteSlot.appendChild(deleteButton);
 
-    trow.addEventListener('mouseover', (e) => {
-      deleteButton.style.display = 'inline';
-    });
+    trow.appendChild(deleteSlot);
 
-    trow.addEventListener('mouseout', (e) => {
-      deleteButton.style.display = 'none';
-    });
+    // trow.addEventListener('mouseover', (e) => {
+    //   deleteButton.style.display = 'inline';
+    // });
+    //
+    // trow.addEventListener('mouseout', (e) => {
+    //   deleteButton.style.display = 'none';
+    // });
 
     bookTableBody.appendChild(trow);
   });
