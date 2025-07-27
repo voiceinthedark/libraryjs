@@ -15,13 +15,12 @@ function Book(id = uuid(), title, author, pages, read) {
   this.read = read;
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages}, ${
-    this.read ? 'read' : 'not read yet'
-  }`;
+Book.prototype.info = function() {
+  return `${this.title} by ${this.author}, ${this.pages}, ${this.read ? 'read' : 'not read yet'
+    }`;
 };
 
-Book.prototype._fields = function () {
+Book.prototype._fields = function() {
   return {
     id: this.id,
     title: this.title,
@@ -31,7 +30,7 @@ Book.prototype._fields = function () {
   };
 };
 
-Book.prototype.unread = function () {
+Book.prototype.unread = function() {
   this.read = !this.read;
 };
 
@@ -60,7 +59,7 @@ function populateLocalStorage(library) {
 
 window.addEventListener('load', (e) => {
   console.log('loaded');
-  if(localStorage.length < 1){
+  if (localStorage.length < 1) {
     const books = [
       new Book(uuid(), 'The Hobbit', 'J.R.R. Tolkien', 295, false),
       new Book(uuid(), 'Starsight', 'Brandon Sanderson', 325, false),
@@ -138,16 +137,16 @@ function showLibrary(books) {
             : `<button data-id=${id} class="readbtn">Unread</button>`;
         trow.appendChild(td);
       } else {
-        
+
         const td = document.createElement('td');
         td.textContent = book[field];
-        if(trow.childNodes.length === 0){
+        if (trow.childNodes.length === 0) {
           // console.log('childnodes ' + trow.childNodes.length)
           td.classList.toggle("title-back");
         }
         trow.appendChild(td);
       }
-        trow.childNodes.forEach(c => c.style.paddingLeft = "10px");
+      trow.childNodes.forEach(c => c.style.paddingLeft = "10px");
     }
     // Adding the delete button
     const deleteButton = document.createElement('span');
@@ -233,6 +232,8 @@ addBookForm.addEventListener('submit', (e) => {
   const pages = document.querySelector('#pages').value;
   const read = document.querySelector('#read').checked;
 
+  // validateForm();
+
   addBookToLibrary(title, author, pages, read);
   // make sure the table is cleared.
   clearTable();
@@ -249,12 +250,67 @@ showLibrary(library);
  * @returns a unique 128bit identifier
  */
 function uuid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     let rnd = (Math.random() * 16) | 0;
     let v = c === 'x' ? rnd : (rnd & 0x3) | 0x8;
     return v.toString(16);
   });
 }
+
+
+
+(function checkValidation() {
+  const titleBook = document.querySelector('#title');
+  const errorTitle = document.querySelector('.error-title');
+  const authorBook = document.querySelector('#author');
+  const errorAuthor = document.querySelector('.error-author');
+
+  const pagesBook = document.querySelector('#pages'); // Assuming pages also needs validation
+  const errorPages = document.querySelector('.error-pages'); // Need a corresponding error element
+
+  // Function to validate a single input and display/clear error
+  function validateInput(inputElement, errorElement) {
+    if (inputElement instanceof HTMLInputElement) {
+      inputElement.setCustomValidity('');
+      if (inputElement.validity.valueMissing) {
+        inputElement.setCustomValidity(`Please fill the ${inputElement.id} field`)
+        errorElement.textContent = inputElement.validationMessage;
+      } else {
+        inputElement.setCustomValidity('');
+        errorElement.textContent = ''; // Clear the error message if valid
+      }
+    }
+  }
+
+  // Attach event listeners for real-time feedback and clearing
+  titleBook.addEventListener('input', () => {
+    validateInput(titleBook, errorTitle);
+  });
+
+  authorBook.addEventListener('input', () => {
+    validateInput(authorBook, errorAuthor);
+  });
+
+  // Example for pages input, assuming it's a number input with constraints
+  pagesBook.addEventListener('input', () => {
+    validateInput(pagesBook, errorPages);
+  });
+
+  // Add event listener to the form's submit button to check validity before submission
+  addBookForm.addEventListener('submit', (e) => {
+    // Manually trigger validation for all fields on submit
+    validateInput(titleBook, errorTitle);
+    validateInput(authorBook, errorAuthor);
+    validateInput(pagesBook, errorPages);
+
+    // If any field is invalid, prevent form submission
+    if (!addBookForm.checkValidity()) {
+      e.preventDefault(); // Stop the form from submitting
+      // Optionally, you could focus on the first invalid field or provide a general error message
+    }
+  });
+})();
+
 
 function openModal(targetId) {
   deleteModal.style.display = 'flex';
@@ -278,7 +334,7 @@ cancelModalButton.addEventListener('click', (e) => {
 });
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = function(event) {
   if (event.target == deleteModal) {
     deleteModal.style.display = 'none';
   }

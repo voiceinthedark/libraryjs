@@ -197,6 +197,26 @@ input[type=submit]:hover {
 
 }
 
+input[type=text]:valid,
+input[type=number]:valid{
+  border: 3px solid green;
+}
+
+input[type=text]:invalid,
+input[type=number]:invalid{
+  border: 3px solid red;
+}
+
+.error-list{
+  list-style: none;
+  align-self: flex-start;
+
+  & > li > span{
+    color: #b00;
+    font-size: 80%;
+  }
+}
+
 #addbook div {
   height: 35px;
   text-align: justify;
